@@ -1,0 +1,13 @@
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import "./env.js";
+
+export const connectDB = async () => {
+  try {
+    const connect = await mongoose.connect(process.env.MONGO_URI);
+    console.log(`MongoDB Connected: ${connect.connection.host}`);
+  } catch (e) {
+    console.log("error : ", e);
+    process.exit(1);
+  }
+};

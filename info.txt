@@ -1,0 +1,13 @@
+transcript = data transkrips subtitle dari video
+summarizewithai = fungsi ai summarize dengan menggabungkan ai dengan fungsi prompt
+extractytid = fungsi untuk penyederhanaan teks dari url youtube menjadi 11 kata
+
+
+
+
+alur proses sistem :
+ 
+1. sistem mengambil url -> sistem akan menggunakan fungsi untuk penyederhanaan url
+2. fungsi url nanti akan mengambil transcript dari video tersebut -> transkrip video akan dibersihkan
+3. teks transkrip akan diproses oleh AI untuk membuat sebuah summary atau kesimpulan ringkas dari video yang dikirim
+4.
