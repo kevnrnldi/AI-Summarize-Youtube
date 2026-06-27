@@ -10,4 +10,7 @@ alur proses sistem :
 1. sistem mengambil url -> sistem akan menggunakan fungsi untuk penyederhanaan url
 2. fungsi url nanti akan mengambil transcript dari video tersebut -> transkrip video akan dibersihkan
 3. teks transkrip akan diproses oleh AI untuk membuat sebuah summary atau kesimpulan ringkas dari video yang dikirim
-4.
+4. transkrip masuk ke dalam database
+5. database dari mongodb dikirim ke groq untuk dibaca dan dibuat riwayat chat khusus
+6. user bisa melakukan chat kembali dengan groq tentang konteks dari video melalui url yang terbuat otomatis saat sistem membuat 
+data ringkasan video baru

@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 import Groq from "groq-sdk";
 import groq from "./config/groq.js";
 
+import chatRoutes from "./routes/chatRoutes.js";
 import analyzeRoutes from "./routes/analyzeRoutes.js";
 const app = express();
 
@@ -84,6 +85,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // listModels();
 // main().catch(console.error);
+
+app.use("/api/chat", chatRoutes);
 
 app.use("/api/analyze", analyzeRoutes);
 

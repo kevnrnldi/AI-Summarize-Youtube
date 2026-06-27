@@ -28,25 +28,25 @@
 
 
 🚏 Fase 5: Routing & Controller Utama (Fitur Analisis)Membangun pintu masuk dan logika untuk fitur pertama: Masukkan Link $\rightarrow$ Muncul Ringkasan.
-   [ ] Jalur Pintu Masuk (Route): Membuat rute POST /api/analyze.
-   [ ] Logika Pemeriksaan (Controller - Bagian 1): Di dalam controller, buat logika untuk mengecek ke database MongoDB: "Apakah ID video ini sudah pernah dianalisis?"
-   [ ] Logika Eksekusi Baru (Controller - Bagian 2): Jika belum ada di database, picu Fungsi Alat Bantu (Fase 3) untuk ambil teks, tembak ke Servis AI (Fase 4)
+   [Done] Jalur Pintu Masuk (Route): Membuat rute POST /api/analyze.
+   [Done] Logika Pemeriksaan (Controller - Bagian 1): Di dalam controller, buat logika untuk mengecek ke database MongoDB: "Apakah ID video ini sudah pernah dianalisis?"
+   [Done] Logika Eksekusi Baru (Controller - Bagian 2): Jika belum ada di database, picu Fungsi Alat Bantu (Fase 3) untuk ambil teks, tembak ke Servis AI (Fase 4)
        untuk diringkas, lalu simpan hasil utuhnya ke MongoDB.
-   [ ] Logika Respons Akhir: Mengirimkan data hasil analisis (baik hasil ambil dari DB atau hasil tembakan AI baru) kembali ke pengguna dengan status 200 OK.
+   [Done] Logika Respons Akhir: Mengirimkan data hasil analisis (baik hasil ambil dari DB atau hasil tembakan AI baru) kembali ke pengguna dengan status 200 OK.
    
 
 💬 Fase 6: Logika Chatbot Kontekstual (Fitur Diskusi)Membangun fitur paling seru: Tanya jawab seputar isi video yang sedang dibuka.
-   [ ] Jalur Pintu Masuk Chat: Membuat rute POST /api/chat/:videoId.[ ] Pengumpul Konteks (Context Gathering): Saat pengguna mengirim pertanyaan baru, 
+   [Done] Jalur Pintu Masuk Chat: Membuat rute POST /api/chat/:videoId.[Done] Pengumpul Konteks (Context Gathering): Saat pengguna mengirim pertanyaan baru, 
        controller harus mengambil transkrip video tersebut dari MongoDB berdasarkan :videoId yang sedang aktif.
-   [ ] Penyusun Memori Jangka Pendek: Mengambil maksimal 5 sampai 10 riwayat chat terakhir dari database untuk dijadikan modal ingatan AI.
-   [ ] Formulasi Tembakan Chat ke AI: Mengirimkan paket komplit ke AI: (Transkrip Video + Riwayat Chat Lama + Pertanyaan Baru).
-   [ ] Pencatatan Sejarah: Setelah AI menjawab, simpan pertanyaan pengguna dan jawaban AI tersebut ke dalam array riwayat chat di MongoDB, 
+   [Done] Penyusun Memori Jangka Pendek: Mengambil maksimal 5 sampai 10 riwayat chat terakhir dari database untuk dijadikan modal ingatan AI.
+   [Done] Formulasi Tembakan Chat ke AI: Mengirimkan paket komplit ke AI: (Transkrip Video + Riwayat Chat Lama + Pertanyaan Baru).
+   [Done] Pencatatan Sejarah: Setelah AI menjawab, simpan pertanyaan pengguna dan jawaban AI tersebut ke dalam array riwayat chat di MongoDB, 
        lalu tampilkan hasilnya di layar pengguna.
 
 
 🧪 Fase 7: Pengujian Kasus Ekstrem (Testing via Postman)Menjadi "satpam kejam" untuk menguji ketangguhan kodinganmu sendiri.
-   [ ] Uji Coba Duplikasi Tab: Masukkan link video A berulang kali di Postman, pastikan di tembakan kedua prosesnya instan karena mengambil dari database,
+   [Done] Uji Coba Duplikasi Tab: Masukkan link video A berulang kali di Postman, pastikan di tembakan kedua prosesnya instan karena mengambil dari database,
        bukan menembak AI lagi.
-   [ ] Uji Coba Lupa Link: Kirim request kosong tanpa link, pastikan Express menangkapnya dan mengeluarkan error 400 Bad Request.
-   [ ] Uji Coba Chat Lanjutan: Lakukan chat di video A, lalu pindah ke video B. Pastikan saat kamu bertanya tentang video B, AI tidak menjawab
+   [Done] Uji Coba Lupa Link: Kirim request kosong tanpa link, pastikan Express menangkapnya dan mengeluarkan error 400 Bad Request.
+   [Done] Uji Coba Chat Lanjutan: Lakukan chat di video A, lalu pindah ke video B. Pastikan saat kamu bertanya tentang video B, AI tidak menjawab
        menggunakan data dari video A.

@@ -18,3 +18,15 @@ export async function scrapeTranscript(videoId) {
 
   return cleanText;
 }
+
+export async function getVideoTitle(videoId) {
+  try {
+    const response = await fetch(
+      `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`,
+    );
+    const data = await response.json();
+    return data.title;
+  } catch (e) {
+    return `Video ${videoId} not found`;
+  }
+}

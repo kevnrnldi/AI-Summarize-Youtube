@@ -1,4 +1,8 @@
-import { extractYoutubeId, scrapeTranscript } from "../utils/youtubeHelper.js";
+import {
+  extractYoutubeId,
+  scrapeTranscript,
+  getVideoTitle,
+} from "../utils/youtubeHelper.js";
 import Video from "../models/VideoSchema.js";
 import { summarizeWithAI } from "../utils/aiHelper.js";
 import { YoutubeTranscript } from "youtube-transcript";
@@ -19,6 +23,7 @@ export async function summarizeVideo(req, res) {
     }
 
     //check, if video already summarized
+    //cari data video tersebut dan kirim dengan membawa status data sudah pernah diproses sebelumnya
     const existing = await Video.findOne({ youtubeId: videoId });
     console.log("existing", existing);
     if (existing) {
@@ -28,14 +33,18 @@ export async function summarizeVideo(req, res) {
     }
 
     //if not, scrape transcript
-    const transcript = await scrapeTranscript(videoId);
-    console.log("Transcript length:", transcript.length);
+    const [title, transcript] = await Promise.all([
+      getVideoTitle(videoId),
+      scrapeTranscript(videoId),
+    ]);
+
+    // console.log("Transcript length:", transcript.length);
     const summary = await summarizeWithAI(transcript);
     console.log("Summary:", summary);
 
     const video = await Video.create({
       youtubeId: videoId,
-      title: `Video ${videoId}`,
+      title,
       summary,
     });
 
