@@ -1,0 +1,121 @@
+
+Fase 8 Setup Frontend React :
+[Done] Inisialisasi React + Vite: Buat project baru dengan perintah
+    npm create vite@latest client -- --template react
+
+[Done] Instalasi Package Frontend: Install axios (HTTP request),
+    react-router-dom (navigasi halaman), dan tailwindcss (styling)
+
+[Done] Konfigurasi Proxy: Di file vite.config.js, arahkan semua
+    request /api ke backend Express di localhost:3000 agar tidak
+    kena CORS error
+
+[Done] Arsitektur Folder React:
+    src/
+    ├── pages/        ← halaman-halaman utama
+    ├── components/   ← komponen kecil yang bisa dipakai ulang
+    ├── utils/        ← fungsi helper (sessionId, axios instance)
+    └── hooks/        ← custom hooks
+
+
+
+Fase 9 Manajemen Sesi Pengguna (Tanpa Login)k
+[Done] Buat SessionId Generator: Di src/utils/session.js, buat fungsi
+    yang cek localStorage — kalau belum ada sessionId maka generate
+    UUID baru pakai crypto.randomUUID() dan simpan
+
+[Done] Buat Axios Instance: Di src/utils/api.js, buat axios instance
+    yang otomatis menyertakan sessionId di setiap request header
+    sehingga tidak perlu tulis manual di tiap komponen
+
+[Done] Test Sesi: Buka browser, cek localStorage di DevTools —
+    pastikan sessionId muncul otomatis saat halaman pertama dibuka
+
+
+
+Fase 10 Halaman Utama 
+[Done] Buat Halaman Home: Di src/pages/Home.jsx, buat tampilan dengan:
+    - Input field untuk URL YouTube
+    - Tombol "Analisis Video"
+    - Loading state saat menunggu response backend
+
+[Done] Integrasi API Analyze: Hubungkan tombol ke POST /api/analyze,
+    kirim URL yang diinput user, tangkap response summary dari backend
+
+[Done] Navigasi ke Halaman Video: Setelah dapat response berhasil,
+    arahkan user ke halaman video dengan membawa videoId
+    menggunakan react-router-dom useNavigate
+
+[Done] Handle Error: Tampilkan pesan error yang ramah jika URL tidak
+    valid atau video gagal dianalisis
+
+
+
+Fase 11 Halaman hasil summary video + chat session 
+[Done] Buat Halaman Video: Di src/pages/VideoPage.jsx, ambil videoId
+    dari URL parameter menggunakan useParams dari react-router-dom
+
+[Done] Tampilkan Summary: Fetch data video dari backend berdasarkan
+    videoId, tampilkan judul dan ringkasan yang sudah dibuat AI
+
+[Done] Buat Komponen Chat: Di src/components/ChatBox.jsx, buat:
+    - Area tampilan riwayat pesan (user vs AI)
+    - Input field untuk pertanyaan baru
+    - Tombol kirim
+
+[ ] Integrasi API Chat: Hubungkan form chat ke POST /api/chat/:videoId,
+    sertakan sessionId dan message di body request
+
+[ ] Tampilkan Riwayat: Setiap kali dapat response baru dari AI,
+    tambahkan ke daftar pesan yang ditampilkan di layar
+
+
+
+
+Fase 12 Pengujian Frontend
+[ ] Test Alur Lengkap: Input URL → dapat summary → buka chat →
+    tanya pertanyaan → dapat jawaban AI
+
+[ ] Test SessionId: Buka tab baru, pastikan sessionId sama —
+    riwayat chat tetap terjaga
+
+[ ] Test Error Handling: Coba input URL tidak valid, pastikan
+    pesan error muncul dengan baik di UI
+
+[ ] Test Responsive: Cek tampilan di ukuran layar berbeda
+    (desktop dan mobile)
+
+
+
+Fase 13 Sistem Login
+[ ] Backend — Buat Model User: Tambah UserSchema di MongoDB dengan
+    field username, email, password (akan di-hash)
+
+[ ] Backend — Install Package Auth: Install bcrypt untuk hash
+    password dan jsonwebtoken untuk buat token JWT
+
+[ ] Backend — Buat Route Auth: Tambah POST /api/auth/register
+    dan POST /api/auth/login di backend
+
+[ ] Backend — Buat Middleware Protect: Fungsi yang cek JWT token
+    di setiap request yang butuh autentikasi
+
+[ ] Frontend — Buat Halaman Login/Register: Form sederhana dengan
+    email dan password, simpan JWT token ke localStorage setelah
+    login berhasil
+
+[ ] Frontend — Update Axios Instance: Tambah JWT token di header
+    Authorization setiap request — gantikan sessionId dengan userId
+    yang lebih permanen
+
+
+
+Fase 14 Deploy
+[ ] Deploy Backend ke Railway: Push kode ke GitHub, hubungkan
+    repo ke Railway, set environment variables (.env) di dashboard
+
+[ ] Deploy Frontend ke Vercel: Push folder client ke GitHub,
+    hubungkan ke Vercel, set VITE_API_URL ke URL backend Railway
+
+[ ] Test Production: Pastikan semua fitur berjalan sama seperti
+    di localhost
